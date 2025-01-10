@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
       this.userService.agregarUser(
         new User(this.userNew.name, this.userNew.age, this.userNew.email, this.userNew.password, this.userNew.heroe)
       );
-      this.userNew = new User(' ', 0, ' ', ' ', Heroes.batman); // Limpiar después de agregar
+      this.userNew = new User(' ', 0, ' ', ' ', Heroes.batman);
     }
   }
 
