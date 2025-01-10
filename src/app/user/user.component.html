@@ -1,0 +1,70 @@
+<!-- src/app/user/user.component.html -->
+<div>
+  <h2>Agregar Usuario</h2>
+  <form (ngSubmit)="agregarUser()">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="userNew.name" name="nombre" required />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="userNew.email" name="email" required />
+    </div>
+    <div>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" [(ngModel)]="userNew.age" name="edad" required />
+    </div>
+    <div>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" [(ngModel)]="userNew.password" name="password" required />
+    </div>
+    <div>
+      <label for="heroe">Héroe de Preferencia:</label>
+      <select id="heroe" [(ngModel)]="userNew.heroe" name="heroe" required>
+        <option *ngFor="let heroe of heroes" [value]="heroe.value">{{ heroe.value }}</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="!userNew.name || !userNew.email || !userNew.age || !userNew.password">
+      Agregar Usuario
+    </button>
+  </form>
+
+  <!-- Botón para mostrar u ocultar la tabla de usuarios -->
+  <button (click)="mostrarUsers()">
+    {{ mostrarUser ? 'Ocultar Usuarios' : 'Mostrar Todos los Usuarios' }}
+  </button>
+
+  <!-- Tabla de usuarios, visible solo si 'mostrarUser' es true -->
+  <div *ngIf="mostrarUser">
+    <h3>Usuarios Registrados</h3>
+    <table border="1">
+      <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Edad</th>
+        <th>Héroe de Preferencia</th>
+        <th>Acción</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let usuario of user">
+        <td>{{ usuario.name }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.age }}</td>
+        <td>{{ usuario.heroe }}</td>
+        <td>
+          <!-- Mostrar imagen si es mayor de 18 años -->
+          <div *ngIf="usuario.age >= 18">
+            <img src="https://via.placeholder.com/150" alt="Imagen para mayores de 18" />
+          </div>
+          <!-- Mostrar mensaje si es menor de 18 años -->
+          <div *ngIf="usuario.age < 18">
+            <p>¡Ups, cumple 18 primero, menorcito!</p>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
